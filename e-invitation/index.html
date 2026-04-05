@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Jemputan Mimi & Ismul</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        .font-cursive { font-family: 'Great Vibes', cursive; }
+        .font-serif { font-family: 'Playfair Display', serif; }
+        
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            -webkit-tap-highlight-color: transparent; 
+            padding-bottom: 80px;
+            background-color: #ffffff;
+            background-image: url("https://www.transparenttextures.com/patterns/clean-gray-paper.png");
+            background-attachment: fixed;
+        }
+        
+        .hero-bg {
+            background: linear-gradient(rgba(255,255,255,0.3), rgba(255,255,255,0.3)), 
+                        url('https://images.unsplash.com/photo-1522673607200-164848374c08?auto=format&fit=crop&w=800&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 85vh;
+            border-bottom-left-radius: 50% 10%;
+            border-bottom-right-radius: 50% 10%;
+        }
+
+        .mobile-container {
+            max-width: 480px;
+            margin: 0 auto;
+            position: relative;
+            background: rgba(255, 255, 255, 0.75);
+            box-shadow: 0 0 50px rgba(0,0,0,0.05);
+        }
+
+        /* Navigasi Hijau Daun Forest (Sama seperti gambar contoh anda) */
+        .fixed-footer-nav {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 480px;
+            background-color: #2d3e2d; 
+            color: #ffffff;
+            height: 75px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            z-index: 1000;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            width: 25%;
+        }
+
+        .nav-item i { font-size: 18px; margin-bottom: 4px; }
+        .nav-item span { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; }
+        .nav-item:active { color: white; transform: scale(1.1); }
+
+        .timer-box {
+            background: #ffffff;
+            border: 1px solid #ecf3ec;
+            color: #065f46;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="weddingMusic" loop>
+        <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
+    </audio>
+
+    <nav class="fixed-footer-nav">
+        <a href="#hubungi" class="nav-item" onclick="handleHubungiClick(); return false;">
+            <i class="fas fa-phone-alt"></i>
+            <span>Hubungi</span>
+        </a>
+        <a href="#countdown" class="nav-item">
+            <i class="fas fa-calendar-alt"></i>
+            <span>Tarikh</span>
+        </a>
+        <a href="#rsvp" class="nav-item">
+            <i class="fas fa-edit"></i>
+            <span>RSVP</span>
+        </a>
+        <a href="#lokasi" class="nav-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Lokasi</span>
+        </a>
+    </nav>
+
+    <div class="mobile-container min-h-screen overflow-x-hidden border-x border-gray-100">
+        
+        <section class="hero-bg flex flex-col justify-center items-center text-center px-6">
+            <div data-aos="fade-up" data-aos-duration="1500" class="z-10 bg-white/30 p-8 rounded-full backdrop-blur-sm border border-white/50">
+                <h2 class="text-[10px] tracking-[0.5em] uppercase mb-4 text-emerald-900 font-bold">Walimatulurus</h2>
+                <h1 class="text-5xl font-cursive text-emerald-800 mb-2">Mimi Suriati</h1>
+                <span class="text-xl font-serif italic text-emerald-700">&</span>
+                <h1 class="text-5xl font-cursive text-emerald-800 mt-2">Ismul Rohazimi</h1>
+                <div class="h-[1px] w-20 bg-emerald-800/20 mx-auto my-6"></div>
+                <p class="text-xs font-bold tracking-[0.2em] text-emerald-900 uppercase">Khamis | 11 Mac 2027</p>
+                <p class="text-[9px] italic text-emerald-800 opacity-70 mt-1">Bersamaan 2 Syawal 1448H</p>
+            </div>
+        </section>
+
+        <section id="countdown" class="py-16 text-center px-4 bg-white/40">
+            <div data-aos="fade-up">
+                <h2 class="text-emerald-800 uppercase tracking-widest text-[9px] mb-8 font-bold">Menghitung Hari Bahagia</h2>
+                <div id="timer" class="flex justify-center gap-3">
+                    <div class="timer-box p-4 rounded-2xl w-20">
+                        <span id="days" class="text-2xl font-bold block">00</span>
+                        <span class="text-[8px] uppercase tracking-tighter opacity-50">Hari</span>
+                    </div>
+                    <div class="timer-box p-4 rounded-2xl w-20">
+                        <span id="hours" class="text-2xl font-bold block">00</span>
+                        <span class="text-[8px] uppercase tracking-tighter opacity-50">Jam</span>
+                    </div>
+                    <div class="timer-box p-4 rounded-2xl w-20">
+                        <span id="minutes" class="text-2xl font-bold block">00</span>
+                        <span class="text-[8px] uppercase tracking-tighter opacity-50">Minit</span>
+                    </div>
+                    <div class="timer-box p-4 rounded-2xl w-20">
+                        <span id="seconds" class="text-2xl font-bold block">00</span>
+                        <span class="text-[8px] uppercase tracking-tighter opacity-50">Saat</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="lokasi" class="py-12 px-6">
+            <div data-aos="fade-up" class="space-y-6">
+                <div class="text-center p-8 bg-white rounded-[2rem] shadow-sm border border-emerald-50">
+                    <i class="fas fa-map-marked-alt text-emerald-100 text-4xl mb-4"></i>
+                    <h3 class="text-emerald-900 font-bold text-xs uppercase tracking-widest mb-3">Lokasi Majlis</h3>
+                    <p class="text-sm text-stone-600 font-serif leading-relaxed px-4">
+                        Dewan Institut Latihan Lembaga Kenaf Dan Tembakau Negara, <br>
+                        <span class="font-bold">Pasir Puteh, Kelantan.</span>
+                    </p>
+                    <a href="https://maps.google.com" target="_blank" class="mt-6 inline-block bg-emerald-800 text-white px-10 py-3 rounded-full text-[10px] font-bold shadow-lg uppercase tracking-widest active:scale-95 transition">Petunjuk Arah</a>
+                </div>
+
+                <div class="text-center p-8 bg-emerald-900 text-white rounded-[2rem] shadow-xl">
+                    <h3 class="text-emerald-200 font-bold text-xs uppercase tracking-widest mb-3 opacity-80">Waktu Kenduri</h3>
+                    <p class="text-3xl font-serif italic mb-2">10.00 AM - 5.00 PM</p>
+                    <div class="h-[1px] w-12 bg-white/20 mx-auto my-4"></div>
+                    <p class="text-[10px] opacity-60 italic font-light px-6">"Kehadiran Tuan/Puan amatlah kami hargai bagi memeriahkan lagi majlis ini."</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="rsvp" class="py-16 px-6">
+            <div class="glass-card p-8 rounded-[2.5rem] shadow-xl" data-aos="zoom-in">
+                <h2 class="text-4xl font-cursive text-center text-emerald-800 mb-8">Buku Tamu</h2>
+                
+                <form name="rsvp-mimi" method="POST" data-netlify="true" action="/success.html" class="space-y-6">
+                    <input type="hidden" name="form-name" value="rsvp-mimi" />
+                    
+                    <div>
+                        <label class="text-[9px] font-bold text-emerald-800/40 uppercase ml-1">Nama Penuh</label>
+                        <input type="text" name="nama" required placeholder="Nama anda" class="w-full p-4 bg-emerald-50/50 border-none rounded-2xl focus:ring-2 focus:ring-emerald-800 outline-none text-sm placeholder-emerald-900/20 shadow-inner">
+                    </div>
+                    <div>
+                        <label class="text-[9px] font-bold text-emerald-800/40 uppercase ml-1">Status Kehadiran</label>
+                        <select name="kehadiran" class="w-full p-4 bg-emerald-50/50 border-none rounded-2xl focus:ring-2 focus:ring-emerald-800 outline-none text-sm text-emerald-900/70 shadow-inner">
+                            <option value="Hadir">InsyaAllah, Saya Hadir</option>
+                            <option value="Hadir (Berdua)">Kami Hadir Berdua</option>
+                            <option value="Tidak Hadir">Maaf, Tidak Dapat Hadir</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="text-[9px] font-bold text-emerald-800/40 uppercase ml-1">Ucapan & Doa</label>
+                        <textarea name="ucapan" rows="3" placeholder="Titipkan ucapan anda..." class="w-full p-4 bg-emerald-50/50 border-none rounded-2xl focus:ring-2 focus:ring-emerald-800 outline-none text-sm placeholder-emerald-900/20 shadow-inner"></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-emerald-800 text-white py-4 rounded-2xl font-bold shadow-xl active:scale-95 transition-all text-[11px] uppercase tracking-widest">Hantar RSVP</button>
+                </form>
+            </div>
+        </section>
+
+        <footer id="hubungi" class="py-16 text-center px-6">
+            <h3 class="text-emerald-800 font-serif italic text-xl mb-8">Hubungi Keluarga</h3>
+            <div class="grid grid-cols-2 gap-4 mb-16">
+                <a href="https://wa.me/60123456789" class="p-4 bg-white rounded-2xl border border-emerald-50 shadow-sm">
+                    <span class="text-[10px] font-bold text-emerald-900 block uppercase">Ismul</span>
+                    <span class="text-[8px] text-emerald-700 opacity-50 uppercase tracking-tighter">WhatsApp</span>
+                </a>
+                <a href="https://wa.me/60198765432" class="p-4 bg-white rounded-2xl border border-emerald-50 shadow-sm">
+                    <span class="text-[10px] font-bold text-emerald-900 block uppercase">Mimi</span>
+                    <span class="text-[8px] text-emerald-700 opacity-50 uppercase tracking-tighter">WhatsApp</span>
+                </a>
+            </div>
+            <div class="opacity-20 text-emerald-900">
+                <p class="text-[8px] uppercase tracking-[0.5em] mb-2 font-bold">Mimi Suriati & Ismul Rohazimi</p>
+                <p class="text-[7px] italic">#MimiIsmulWedding2027</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1000, once: true });
+
+        // Countdown Logic (11 March 2027)
+        const weddingDate = new Date("Mar 11, 2027 10:00:00").getTime();
+        setInterval(function() {
+            const now = new Date().getTime();
+            const diff = weddingDate - now;
+            if (diff > 0) {
+                document.getElementById("days").innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+                document.getElementById("hours").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                document.getElementById("minutes").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                document.getElementById("seconds").innerText = Math.floor((diff % (1000 * 60)) / 1000);
+            }
+        }, 1000);
+
+        // Music Logic (Starts on first interaction with nav)
+        const music = document.getElementById("weddingMusic");
+        document.querySelector('.fixed-footer-nav').addEventListener('click', function() {
+            if (music.paused) music.play();
+        }, { once: true });
+
+        function handleHubungiClick() {
+            document.getElementById('hubungi').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
